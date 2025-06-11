@@ -6,13 +6,21 @@ export const fetchProducts = createAsyncThunk("products/fetch", async () => {
   return response.data;
 });
 
+export type ProductsState = {
+  items: any[];
+  status: "idle" | "loading" | "succeeded" | "failed";
+  layoutMode: "grid" | "list";
+};
+
+const initialState: ProductsState = {
+  items: [],
+  status: "idle",
+  layoutMode: "grid",
+};
+
 const productsSlice = createSlice({
   name: "products",
-  initialState: {
-    items: [],
-    status: "idle",
-    layoutMode: "list",
-  },
+  initialState,
   reducers: {
     toggleLayoutMode(state) {
       state.layoutMode = state.layoutMode === "list" ? "grid" : "list";
