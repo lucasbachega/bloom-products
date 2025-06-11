@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import { useCallback } from "react";
+import { memo, useCallback } from "react";
 import { useAppSelector } from "../../hooks/reduxHooks";
 import { IProduct } from "../../types/products";
 import ProductListItem from "./item/ProductListItem";
@@ -32,4 +32,4 @@ const ProductList = ({ products }: Props) => {
   );
 };
 
-export default ProductList;
+export default memo(ProductList);

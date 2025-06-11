@@ -1,18 +1,18 @@
-import { Box, CircularProgress, Pagination } from "@mui/material";
-import { useEffect, useMemo, useState } from "react";
+import { Box, CircularProgress } from "@mui/material";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import ProductList from "../../components/products/ProductList";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { fetchProducts } from "../../store/reducers/productsSlice";
+import BottomPagination from "./components/BottomPagination";
 import Toolbar from "./components/Toolbar";
-
-const ITEMS_PER_PAGE = 10;
 
 export default function Home() {
   const dispatch = useAppDispatch();
   const { items, status } = useAppSelector((state) => state.products);
   const [searchParams] = useSearchParams();
   const [page, setPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
   const query = searchParams.get("search")?.toLowerCase() || "";
 
@@ -20,7 +20,7 @@ export default function Home() {
     if (status === "idle") {
       dispatch(fetchProducts());
     }
-  }, [dispatch, status]);
+  }, [status]);
 
   useEffect(() => {
     setPage(1);
@@ -33,11 +33,18 @@ export default function Home() {
   }, [items, query]);
 
   const paginated = useMemo(() => {
-    const start = (page - 1) * ITEMS_PER_PAGE;
-    return filteredProducts.slice(start, start + ITEMS_PER_PAGE);
+    const start = (page - 1) * itemsPerPage;
+    return filteredProducts.slice(start, start + itemsPerPage);
   }, [filteredProducts, page]);
 
-  const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
+  const totalPages = useMemo<number>(
+    () => Math.ceil(filteredProducts.length / itemsPerPage),
+    [itemsPerPage, filteredProducts]
+  );
+
+  const handlePageChange = useCallback((newPage: number) => {
+    setPage(newPage);
+  }, []);
 
   if (status === "loading") {
     return (
@@ -48,18 +55,15 @@ export default function Home() {
   }
 
   return (
-    <Box>
+    <Box flex={1} pb={"100px"}>
       <Toolbar />
-      <ProductList products={items} />
+      <ProductList products={paginated} />
       {totalPages > 1 && (
-        <Box mt={4} display="flex" justifyContent="center">
-          <Pagination
-            count={totalPages}
-            page={page}
-            onChange={(_, value) => setPage(value)}
-            color="primary"
-          />
-        </Box>
+        <BottomPagination
+          page={page}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
       )}
     </Box>
   );
