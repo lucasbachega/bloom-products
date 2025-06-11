@@ -11,8 +11,13 @@ const productsSlice = createSlice({
   initialState: {
     items: [],
     status: "idle",
+    layoutMode: "list",
   },
-  reducers: {},
+  reducers: {
+    toggleLayoutMode(state) {
+      state.layoutMode = state.layoutMode === "list" ? "grid" : "list";
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchProducts.pending, (state) => {
@@ -27,5 +32,6 @@ const productsSlice = createSlice({
       });
   },
 });
+export const { toggleLayoutMode } = productsSlice.actions;
 
 export default productsSlice.reducer;
