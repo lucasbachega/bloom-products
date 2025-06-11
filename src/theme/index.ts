@@ -40,6 +40,12 @@ export const theme = createTheme({
   colorSchemes: {
     light: {
       palette: {
+        secondary: {
+          main: "#5062F0",
+        },
+        primary: {
+          main: "#0B1A8E",
+        },
         text: {
           primary: "#0D0D0D",
           secondary: "#69666F",
@@ -48,6 +54,12 @@ export const theme = createTheme({
     },
     dark: {
       palette: {
+        secondary: {
+          main: "#5062F0",
+        },
+        primary: {
+          main: "#0B1A8E",
+        },
         text: {
           primary: "#FFF",
           secondary: "#EBE9F0",
