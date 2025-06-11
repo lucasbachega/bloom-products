@@ -32,7 +32,6 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           transition: "none",
-          borderRadius: "100px",
         },
       },
     },
