@@ -1,17 +1,19 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
-import ToggleThemeButton from "./components/buttons/ToggleThemeButton";
 import AppContainer from "./components/layout/AppContainer";
+import AppRouter from "./components/routes/AppRouter";
 import { theme } from "./theme";
 
 function App() {
   return (
     <ThemeProvider theme={theme} defaultMode="light">
       <CssBaseline />
-      <AppContainer>
-        <ToggleThemeButton />
-        Olá mundo
-      </AppContainer>
+      <BrowserRouter>
+        <AppContainer>
+          <AppRouter />
+        </AppContainer>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
