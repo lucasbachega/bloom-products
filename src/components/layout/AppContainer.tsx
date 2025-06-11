@@ -14,7 +14,7 @@ const AppContainer = ({ children }: any) => {
 
   return (
     <div className="App">
-      <Box flex={1} bgcolor={"background.default"} color={"text.primary"}>
+      <Box flex={1} bgcolor={"background.default"} component={"main"}>
         {children}
       </Box>
     </div>
