@@ -1,14 +1,14 @@
-import { AddShoppingCart } from "@mui/icons-material";
 import {
   Box,
-  Button,
   CardActionArea,
   Stack,
   styled,
-  Typography,
+  Typography
 } from "@mui/material";
 import { memo } from "react";
+import { useNavigate } from "react-router-dom";
 import { IProduct } from "../../../types/products";
+import CartActionButton from "./CartActionButton";
 
 const Root = styled(Box, {
   shouldForwardProp: (prop) => prop !== "isGridLike",
@@ -59,25 +59,25 @@ const ProductDescription = styled(Typography)({
   textOverflow: "ellipsis",
 });
 
-const AddCartButton = styled(Button, {
-  shouldForwardProp: (prop) => prop !== "isGridLike",
-})<{ isGridLike: boolean }>(({ isGridLike }) => ({
-  width: isGridLike ? "100%" : 60,
-  height: isGridLike ? 40 : "100%",
-  borderRadius: 0,
-  borderTopLeftRadius: isGridLike ? 0 : undefined,
-  borderBottomLeftRadius: isGridLike ? 0 : undefined,
-}));
-
 interface Props {
   product: IProduct;
   isGridLike?: boolean;
 }
 
 const ProductListItem = ({ product, isGridLike = false }: Props) => {
+  const navigate = useNavigate();
+  console.log("render: ", product.id);
+
+  const navigateToDetail = () => {
+    navigate(`/product/${product.id}`);
+  };
+
   return (
     <Root isGridLike={isGridLike}>
-      <CardActionArea sx={{ flex: 1, height: "100%", p: isGridLike ? 2 : 3 }}>
+      <CardActionArea
+        sx={{ flex: 1, height: "100%", p: isGridLike ? 2 : 3 }}
+        onClick={navigateToDetail}
+      >
         <Stack
           direction="row"
           gap={2}
@@ -122,9 +122,12 @@ const ProductListItem = ({ product, isGridLike = false }: Props) => {
         </Stack>
       </CardActionArea>
 
-      <AddCartButton isGridLike={isGridLike} variant="contained">
-        <AddShoppingCart />
-      </AddCartButton>
+      <CartActionButton
+        isGridLike={isGridLike}
+        price={product.price}
+        productId={product.id}
+        title={product.title}
+      />
     </Root>
   );
 };

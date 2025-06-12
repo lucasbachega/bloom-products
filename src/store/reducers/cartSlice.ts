@@ -1,7 +1,8 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "..";
 
 type CartItem = {
-  id: string;
+  id: number;
   title: string;
   price: number;
   quantity: number;
@@ -27,15 +28,22 @@ const cartSlice = createSlice({
         state.items.push({ ...action.payload, quantity: 1 });
       }
     },
-    removeFromCart(state, action: PayloadAction<string>) {
+    removeFromCart(state, action: PayloadAction<number>) {
       state.items = state.items.filter((item) => item.id !== action.payload);
     },
-    updateQuantity(
-      state,
-      action: PayloadAction<{ id: string; quantity: number }>
-    ) {
-      const item = state.items.find((i) => i.id === action.payload.id);
-      if (item) item.quantity = action.payload.quantity;
+    incrementQuantity: (state, action: PayloadAction<number>) => {
+      const item = state.items.find((i) => i.id === action.payload);
+      if (item) item.quantity += 1;
+    },
+    decrementQuantity: (state, action: PayloadAction<number>) => {
+      const item = state.items.find((i) => i.id === action.payload);
+      if (!item) return;
+
+      if (item.quantity === 1) {
+        state.items = state.items.filter((i) => i.id !== action.payload);
+      } else {
+        item.quantity -= 1;
+      }
     },
     clearCart(state) {
       state.items = [];
@@ -43,6 +51,21 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, updateQuantity, clearCart } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  incrementQuantity,
+  decrementQuantity,
+  clearCart,
+} = cartSlice.actions;
 export default cartSlice.reducer;
+
+export const selectCartItems = (state: RootState) => state.cart.items;
+
+export const selectQuantityByProductId = createSelector(
+  [selectCartItems, (state, productId) => productId],
+  (items, productId) => {
+    const item = items.find((i) => i.id === productId);
+    return item?.quantity ?? 0;
+  }
+);
