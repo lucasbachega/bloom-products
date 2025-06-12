@@ -12,6 +12,9 @@ interface Props {
   image: string;
   price: number;
   isGridLike: boolean;
+  discountPercent?: number;
+  discountPrice?: number;
+  hasDiscount?: boolean;
 }
 
 const CartActionButton = ({
@@ -20,13 +23,27 @@ const CartActionButton = ({
   title,
   image,
   isGridLike,
+  discountPercent,
+  discountPrice,
+  hasDiscount,
 }: Props) => {
   const dispatch = useAppDispatch();
   const isInCart = useIsInCart(productId);
 
   const handleOnClick = () => {
     if (!isInCart) {
-      dispatch(addToCart({ id: productId, price, title, image, quantity: 1 }));
+      dispatch(
+        addToCart({
+          id: productId,
+          price,
+          title,
+          image,
+          discountPercent,
+          discountPrice,
+          hasDiscount,
+          quantity: 1,
+        })
+      );
     } else {
       dispatch(removeFromCart(productId));
     }

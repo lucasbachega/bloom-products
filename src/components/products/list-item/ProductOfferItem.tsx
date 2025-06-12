@@ -17,6 +17,7 @@ import { useAppDispatch } from "../../../hooks/reduxHooks";
 import { useIsInCart } from "../../../hooks/useIsInCart";
 import { addToCart, removeFromCart } from "../../../store/reducers/cartSlice";
 import { IProduct } from "../../../types/products";
+import { formatAmount } from "../../../utils/formatters";
 import DiscountBadge from "../DiscountBadge";
 
 interface ItemProps {
@@ -108,10 +109,10 @@ const ProductOfferItem = ({ product }: ItemProps) => {
                 color="textSecondary"
                 textAlign={"right"}
               >
-                DE: R$ {product.price}
+                DE: R$ {formatAmount(product.price)}
               </Typography>
               <Typography fontWeight={600} textAlign={"right"}>
-                POR: R$ {product.discountPrice}
+                POR: R$ {formatAmount(product.discountPrice)}
               </Typography>
             </Stack>
           </Stack>

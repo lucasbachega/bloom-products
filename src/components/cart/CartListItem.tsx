@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { removeFromCart } from "../../store/reducers/cartSlice";
 import { ICartItem } from "../../types/cart";
+import { formatAmount } from "../../utils/formatters";
 import DiscountBadge from "../products/DiscountBadge";
 import QuantityInput from "./QuantityInput";
 
@@ -76,15 +77,15 @@ const CartListItem = ({ item }: Props) => {
                     textDecoration: "line-through",
                   }}
                 >
-                  DE: R$ {item.price}
+                  DE: R$ {formatAmount(item.price)}
                 </Typography>
                 <Typography mt={-1} fontWeight={600} textAlign={"right"}>
-                  POR: R$ {item.price}
+                  POR: R$ {formatAmount(item.price)}
                 </Typography>
               </>
             ) : (
               <Typography fontWeight={600} textAlign={"right"}>
-                R$ {item.price}
+                R$ {formatAmount(item.price)}
               </Typography>
             )}
             <Stack direction={"row"} alignItems={"center"}>
@@ -97,7 +98,9 @@ const CartListItem = ({ item }: Props) => {
                 gap={1}
               />
             </Stack>
-            <Typography fontWeight={700}>Total: {totalAmount}</Typography>
+            <Typography fontWeight={700}>
+              Total: {formatAmount(totalAmount)}
+            </Typography>
           </Stack>
         </Box>
       </Stack>

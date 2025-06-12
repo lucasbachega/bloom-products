@@ -2,6 +2,7 @@ import { Box, CardActionArea, Stack, styled, Typography } from "@mui/material";
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { IProduct } from "../../../types/products";
+import { formatAmount } from "../../../utils/formatters";
 import DiscountBadge from "../DiscountBadge";
 import CartActionButton from "./CartActionButton";
 
@@ -102,7 +103,7 @@ const ProductListItem = ({ product, isGridLike = false }: Props) => {
 
             <Box mt={isGridLike ? 1.5 : 0}>
               <Typography variant="h4" fontWeight={600} mt={1} gutterBottom>
-                R$ {product.price}
+                R$ {formatAmount(product.price)}
               </Typography>
               <ProductDescription
                 variant="body2"
@@ -122,6 +123,9 @@ const ProductListItem = ({ product, isGridLike = false }: Props) => {
         productId={product.id}
         title={product.title}
         image={product.image}
+        discountPercent={product.discountPercent}
+        discountPrice={product.discountPrice}
+        hasDiscount={product.hasDiscount}
       />
     </Root>
   );
