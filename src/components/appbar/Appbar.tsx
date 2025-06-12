@@ -2,9 +2,12 @@ import {
   AppBar,
   Box,
   Container,
+  Stack,
   Toolbar,
   Typography,
+  useMediaQuery,
   useScrollTrigger,
+  useTheme,
 } from "@mui/material";
 import { memo } from "react";
 import ToggleThemeButton from "../buttons/ToggleThemeButton";
@@ -14,11 +17,15 @@ import SearchBar from "./SearchBar";
 const Appbar = () => {
   const scrolled = useScrollTrigger({
     disableHysteresis: true,
-    target: undefined,
     threshold: 0,
   });
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <AppBar
+      position="sticky"
       variant="outlined"
       enableColorOnDark
       color="secondary"
@@ -29,21 +36,32 @@ const Appbar = () => {
       }}
     >
       <Container>
-        <Toolbar
-          disableGutters
-          sx={{
-            gap: 1,
-          }}
-        >
+        <Toolbar disableGutters sx={{ gap: 1 }}>
           <Typography variant="h5" fontWeight={700}>
             Bloom Store
           </Typography>
+
           <Box flex={1} />
-          <SearchBar />
+
+          {!isMobile && <SearchBar />}
+
           <Box flex={1} />
+
           <ToggleThemeButton />
           <CartButton />
         </Toolbar>
+
+        {isMobile && (
+          <Stack
+            direction={"row"}
+            justifyContent={"center"}
+            px={2}
+            pb={2}
+            mt={1}
+          >
+            <SearchBar />
+          </Stack>
+        )}
       </Container>
     </AppBar>
   );

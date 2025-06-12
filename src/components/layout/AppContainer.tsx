@@ -20,7 +20,6 @@ const AppContainer = ({ children }: any) => {
         flexDirection={"column"}
         bgcolor={"background.default"}
         component={"main"}
-        pt={"67px"}
       >
         {children}
       </Box>

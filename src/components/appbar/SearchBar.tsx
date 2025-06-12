@@ -33,7 +33,7 @@ const SearchBar = () => {
       sx={{
         borderRadius: 100,
         height: 40,
-        maxWidth: 400,
+        maxWidth: 450,
         width: "100%",
         "& .MuiIconButton-root": { color: "action.active" },
       }}
