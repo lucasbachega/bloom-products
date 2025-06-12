@@ -51,16 +51,18 @@ export default productsSlice.reducer;
 
 type ProductFilter = "all" | "discounted" | "regular";
 
-export const selectProducts = (filter: ProductFilter = "all") =>
-  createSelector(
+export const selectProducts = createSelector(
+  [
     (state: RootState) => state.products.items,
-    (products) => {
-      if (filter === "discounted") {
-        return products.filter((p) => p.hasDiscount);
-      }
-      if (filter === "regular") {
-        return products.filter((p) => !p.hasDiscount);
-      }
-      return products;
+    (state: RootState, filter: ProductFilter) => filter,
+  ],
+  (products, filter) => {
+    if (filter === "discounted") {
+      return products.filter((p) => p.hasDiscount);
     }
-  );
+    if (filter === "regular") {
+      return products.filter((p) => !p.hasDiscount);
+    }
+    return products;
+  }
+);

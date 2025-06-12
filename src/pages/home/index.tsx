@@ -1,15 +1,15 @@
 import { InfoOutlineRounded } from "@mui/icons-material";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import { useEffect } from "react";
-import OfferShowcase from "../../components/offer-showcase/OfferShowcase";
-import ProductList from "../../components/products/ProductList";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { fetchProducts } from "../../store/reducers/productsSlice";
+import MainList from "./components/MainList";
 import Toolbar from "./components/Toolbar";
+import OfferShowcase from "./components/offer-showcase/OfferShowcase";
 
-export default function Home() {
-  const dispatch = useAppDispatch();
+function Wrapper({ children }: any) {
   const status = useAppSelector((state) => state.products.status);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (status === "idle") {
@@ -17,30 +17,40 @@ export default function Home() {
     }
   }, [status]);
 
-  if (status === "loading") {
-    return (
-      <Box mt={"200px"} textAlign="center">
-        <CircularProgress thickness={5} />
-      </Box>
-    );
+  if (status !== "succeeded") {
+    if (status === "loading") {
+      return (
+        <Box mt={"200px"} textAlign="center">
+          <CircularProgress thickness={5} />
+        </Box>
+      );
+    }
+
+    if (status === "failed") {
+      return (
+        <Box mt={"200px"} textAlign="center">
+          <InfoOutlineRounded color="error" />
+          <Typography textAlign={"center"} fontWeight={600} mt={2}>
+            Erro ao carregar os produtos
+          </Typography>
+        </Box>
+      );
+    }
+
+    return null;
   }
 
-  if (status === "failed") {
-    return (
-      <Box mt={"200px"} textAlign="center">
-        <InfoOutlineRounded color="error" />
-        <Typography textAlign={"center"} fontWeight={600} mt={2}>
-          Erro ao carregar os produtos
-        </Typography>
-      </Box>
-    );
-  }
+  return children;
+}
 
+export default function Home() {
   return (
-    <Box flex={1} display="flex" flexDirection="column" pb="100px">
-      <Toolbar />
-      <OfferShowcase />
-      <ProductList />
-    </Box>
+    <Wrapper>
+      <Box flex={1} display="flex" flexDirection="column" pb="100px">
+        <Toolbar />
+        <OfferShowcase />
+        <MainList />
+      </Box>
+    </Wrapper>
   );
 }
