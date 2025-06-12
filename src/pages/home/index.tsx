@@ -1,5 +1,5 @@
 import { InfoOutlineRounded } from "@mui/icons-material";
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Box, CircularProgress, Container, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { fetchProducts } from "../../store/reducers/productsSlice";
@@ -49,7 +49,11 @@ export default function Home() {
       <Box flex={1} display="flex" flexDirection="column" pb="100px">
         <Toolbar />
         <OfferShowcase />
-        <MainList />
+        <Container
+          sx={{ flex: 1, pt: "40px", display: "flex", flexDirection: "column" }}
+        >
+          <MainList />
+        </Container>
       </Box>
     </Wrapper>
   );

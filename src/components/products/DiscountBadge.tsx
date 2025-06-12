@@ -15,7 +15,7 @@ const DiscountBadge = ({ discountPercent = 0, ...rest }: Props & BoxProps) => {
     <Box
       position={"absolute"}
       borderRadius={100}
-      bgcolor={"success.main"}
+      bgcolor={"secondary.main"}
       top={-5}
       left={-10}
       py={0.3}

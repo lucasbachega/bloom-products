@@ -2,6 +2,7 @@ import {
   createAsyncThunk,
   createSelector,
   createSlice,
+  PayloadAction,
 } from "@reduxjs/toolkit";
 import { RootState } from "..";
 import { listProducts } from "../../services/api";
@@ -30,6 +31,9 @@ const productsSlice = createSlice({
     toggleLayoutMode(state) {
       state.layoutMode = state.layoutMode === "list" ? "grid" : "list";
     },
+    setLayoutMode(state, action: PayloadAction<"list" | "grid">) {
+      state.layoutMode = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -45,7 +49,7 @@ const productsSlice = createSlice({
       });
   },
 });
-export const { toggleLayoutMode } = productsSlice.actions;
+export const { toggleLayoutMode, setLayoutMode } = productsSlice.actions;
 
 export default productsSlice.reducer;
 

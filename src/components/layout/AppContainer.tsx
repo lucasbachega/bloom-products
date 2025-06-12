@@ -1,4 +1,4 @@
-import { Box, Container, useColorScheme } from "@mui/material";
+import { Box, useColorScheme } from "@mui/material";
 import { useEffect } from "react";
 
 const AppContainer = ({ children }: any) => {
@@ -20,12 +20,9 @@ const AppContainer = ({ children }: any) => {
         flexDirection={"column"}
         bgcolor={"background.default"}
         component={"main"}
+        pt={"67px"}
       >
-        <Container
-          sx={{ flex: 1, pt: "80px", display: "flex", flexDirection: "column" }}
-        >
-          {children}
-        </Container>
+        {children}
       </Box>
     </div>
   );
