@@ -9,17 +9,24 @@ import QuantityInput from "../../cart/QuantityInput";
 interface Props {
   productId: number;
   title: string;
+  image: string;
   price: number;
   isGridLike: boolean;
 }
 
-const CartActionButton = ({ productId, price, title, isGridLike }: Props) => {
+const CartActionButton = ({
+  productId,
+  price,
+  title,
+  image,
+  isGridLike,
+}: Props) => {
   const dispatch = useAppDispatch();
   const isInCart = useIsInCart(productId);
 
   const handleOnClick = () => {
     if (!isInCart) {
-      dispatch(addToCart({ id: productId, price, title, quantity: 1 }));
+      dispatch(addToCart({ id: productId, price, title, image, quantity: 1 }));
     } else {
       dispatch(removeFromCart(productId));
     }

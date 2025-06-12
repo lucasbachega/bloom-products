@@ -1,10 +1,4 @@
-import {
-  Box,
-  CardActionArea,
-  Stack,
-  styled,
-  Typography
-} from "@mui/material";
+import { Box, CardActionArea, Stack, styled, Typography } from "@mui/material";
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { IProduct } from "../../../types/products";
@@ -65,7 +59,6 @@ interface Props {
 
 const ProductListItem = ({ product, isGridLike = false }: Props) => {
   const navigate = useNavigate();
-  console.log("render: ", product.id);
 
   const navigateToDetail = () => {
     navigate(`/product/${product.id}`);
@@ -126,6 +119,7 @@ const ProductListItem = ({ product, isGridLike = false }: Props) => {
         price={product.price}
         productId={product.id}
         title={product.title}
+        image={product.image}
       />
     </Root>
   );

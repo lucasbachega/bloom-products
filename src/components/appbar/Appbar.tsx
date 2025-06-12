@@ -1,7 +1,21 @@
-import { AppBar, Box, Container, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Container,
+  Toolbar,
+  Typography,
+  useScrollTrigger,
+} from "@mui/material";
+import { memo } from "react";
 import ToggleThemeButton from "../buttons/ToggleThemeButton";
+import CartButton from "./CartButton";
 
 const Appbar = () => {
+  const scrolled = useScrollTrigger({
+    disableHysteresis: true,
+    target: undefined,
+    threshold: 0,
+  });
   return (
     <AppBar
       variant="outlined"
@@ -10,19 +24,26 @@ const Appbar = () => {
       sx={{
         "& .MuiTypography-root": { color: "#FFF" },
         "& .MuiIconButton-root": { color: "#FFF" },
+        boxShadow: scrolled ? 4 : 0,
       }}
     >
       <Container>
-        <Toolbar disableGutters>
+        <Toolbar
+          disableGutters
+          sx={{
+            gap: 1,
+          }}
+        >
           <Typography variant="h5" fontWeight={700}>
             Bloom Store
           </Typography>
           <Box flex={1} />
           <ToggleThemeButton />
+          <CartButton />
         </Toolbar>
       </Container>
     </AppBar>
   );
 };
 
-export default Appbar;
+export default memo(Appbar);
