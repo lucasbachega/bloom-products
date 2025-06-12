@@ -29,7 +29,7 @@ function Wrapper({ children }: any) {
     if (status === "failed") {
       return (
         <Box mt={"200px"} textAlign="center">
-          <InfoOutlineRounded color="error" />
+          <InfoOutlineRounded color="error" sx={{ fontSize: "5rem" }} />
           <Typography textAlign={"center"} fontWeight={600} mt={2}>
             Erro ao carregar os produtos
           </Typography>

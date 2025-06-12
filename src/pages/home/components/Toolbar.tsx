@@ -15,7 +15,7 @@ import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 import {
   selectProductsTotal,
   setItemsPerPage,
-  setLayoutMode
+  setLayoutMode,
 } from "../../../store/reducers/productsSlice";
 
 function ToggleLayoutButton() {
@@ -42,6 +42,7 @@ function ToggleLayoutButton() {
 function SelectItemsPerPage() {
   const dispatch = useAppDispatch();
   const itemsPerPage = useAppSelector((state) => state.products.itemsPerPage);
+
   return (
     <Stack direction={"row"} alignItems={"center"} gap={1}>
       <Typography variant="body2">Exibir</Typography>

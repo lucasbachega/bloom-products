@@ -9,6 +9,7 @@ import {
 import { memo } from "react";
 import ToggleThemeButton from "../buttons/ToggleThemeButton";
 import CartButton from "./CartButton";
+import SearchBar from "./SearchBar";
 
 const Appbar = () => {
   const scrolled = useScrollTrigger({
@@ -37,6 +38,8 @@ const Appbar = () => {
           <Typography variant="h5" fontWeight={700}>
             Bloom Store
           </Typography>
+          <Box flex={1} />
+          <SearchBar />
           <Box flex={1} />
           <ToggleThemeButton />
           <CartButton />
