@@ -1,18 +1,18 @@
 import { Add, Remove } from "@mui/icons-material";
-import { IconButton, Stack, Typography } from "@mui/material";
+import { IconButton, Stack, StackProps, Typography } from "@mui/material";
 import { memo } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import {
-    decrementQuantity,
-    incrementQuantity,
-    selectQuantityByProductId,
+  decrementQuantity,
+  incrementQuantity,
+  selectQuantityByProductId,
 } from "../../store/reducers/cartSlice";
 
 interface Props {
   productId: number;
 }
 
-const QuantityInput = ({ productId }: Props) => {
+const QuantityInput = ({ productId, ...rest }: Props & StackProps) => {
   const dispatch = useAppDispatch();
 
   const value = useAppSelector((state) =>
@@ -27,7 +27,7 @@ const QuantityInput = ({ productId }: Props) => {
   };
 
   return (
-    <Stack direction={"row"} alignItems={"center"} gap={2}>
+    <Stack direction={"row"} alignItems={"center"} gap={2} {...rest}>
       <IconButton onClick={increment}>
         <Add />
       </IconButton>

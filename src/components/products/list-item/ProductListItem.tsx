@@ -40,7 +40,6 @@ const ProductImage = styled("img", {
   maxHeight: isGridLike ? "100%" : "80%",
   maxWidth: "100%",
   objectFit: "contain",
-  transition: ".1s ease",
 }));
 
 const ProductTitle = styled(Typography)({

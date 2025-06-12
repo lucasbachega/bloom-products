@@ -26,12 +26,18 @@ const CartActionButton = ({ productId, price, title, isGridLike }: Props) => {
   };
 
   return (
-    <Stack direction={"row"} alignItems={"center"} gap={2}>
-      {isInCart && (
-        <Box flex={1}>
-          <QuantityInput productId={productId} />
-        </Box>
-      )}
+    <Stack direction={"row"} alignItems={"center"} gap={isInCart ? 2 : 0}>
+      <Box
+        flex={isInCart ? 1 : 0}
+        overflow={"hidden"}
+        sx={{ transition: ".15s ease" }}
+      >
+        <QuantityInput
+          productId={productId}
+          direction={isGridLike ? "row" : "column"}
+          visibility={isInCart ? "visible" : "hidden"}
+        />
+      </Box>
       <Button
         variant="contained"
         onClick={handleOnClick}
@@ -43,6 +49,7 @@ const CartActionButton = ({ productId, price, title, isGridLike }: Props) => {
           borderRadius: 0,
           borderTopLeftRadius: isGridLike ? 0 : undefined,
           borderBottomLeftRadius: isGridLike ? 0 : undefined,
+          transition: "flex .15s ease",
         }}
       >
         {isInCart ? <RemoveShoppingCart /> : <ShoppingCart />}
