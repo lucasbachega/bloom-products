@@ -12,7 +12,7 @@ export default function Home() {
   const { items, status } = useAppSelector((state) => state.products);
   const [searchParams] = useSearchParams();
   const [page, setPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
 
   const query = searchParams.get("search")?.toLowerCase() || "";
 
@@ -55,9 +55,10 @@ export default function Home() {
   }
 
   return (
-    <Box flex={1} pb={"100px"}>
+    <Box flex={1} display={"flex"} flexDirection={"column"} pb={"100px"}>
       <Toolbar />
       <ProductList products={paginated} />
+      <Box flex={1} />
       {totalPages > 1 && (
         <BottomPagination
           page={page}

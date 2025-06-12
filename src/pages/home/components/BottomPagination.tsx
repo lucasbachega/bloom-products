@@ -13,7 +13,7 @@ const BottomPagination = ({
   onPageChange = () => {},
 }: Props) => {
   return (
-    <Box mt={4} display="flex" justifyContent="center">
+    <Box mt={5} display="flex" justifyContent="center">
       <Pagination
         sx={{
           "& .MuiButtonBase-root": {
@@ -23,7 +23,9 @@ const BottomPagination = ({
         count={totalPages}
         page={page}
         onChange={(_, value) => onPageChange(value)}
-        color="secondary"
+        color="primary"
+        variant="outlined"
+        shape="rounded"
       />
     </Box>
   );

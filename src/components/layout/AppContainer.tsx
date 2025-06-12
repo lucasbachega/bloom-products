@@ -14,8 +14,18 @@ const AppContainer = ({ children }: any) => {
 
   return (
     <div className="App">
-      <Box flex={1} bgcolor={"background.default"} component={"main"}>
-        <Container sx={{ pt: "80px" }}>{children}</Container>
+      <Box
+        flex={1}
+        display={"flex"}
+        flexDirection={"column"}
+        bgcolor={"background.default"}
+        component={"main"}
+      >
+        <Container
+          sx={{ flex: 1, pt: "80px", display: "flex", flexDirection: "column" }}
+        >
+          {children}
+        </Container>
       </Box>
     </div>
   );

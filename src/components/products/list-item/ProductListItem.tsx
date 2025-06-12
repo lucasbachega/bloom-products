@@ -2,6 +2,7 @@ import { Box, CardActionArea, Stack, styled, Typography } from "@mui/material";
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { IProduct } from "../../../types/products";
+import DiscountBadge from "../DiscountBadge";
 import CartActionButton from "./CartActionButton";
 
 const Root = styled(Box, {
@@ -9,7 +10,6 @@ const Root = styled(Box, {
 })<{ isGridLike: boolean }>(({ theme, isGridLike }) => ({
   display: "flex",
   flexDirection: isGridLike ? "column" : "row",
-  overflow: "hidden",
   borderRadius: 0,
   position: "relative",
   boxShadow: theme.shadows[6],
@@ -66,6 +66,8 @@ const ProductListItem = ({ product, isGridLike = false }: Props) => {
 
   return (
     <Root isGridLike={isGridLike}>
+      <DiscountBadge discountPercent={product.discountPercent} />
+
       <CardActionArea
         sx={{ flex: 1, height: "100%", p: isGridLike ? 2 : 3 }}
         onClick={navigateToDetail}
