@@ -1,20 +1,15 @@
-import { Box, CircularProgress } from "@mui/material";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { InfoOutlineRounded } from "@mui/icons-material";
+import { Box, CircularProgress, Typography } from "@mui/material";
+import { useEffect } from "react";
+import OfferShowcase from "../../components/offer-showcase/OfferShowcase";
 import ProductList from "../../components/products/ProductList";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { fetchProducts } from "../../store/reducers/productsSlice";
-import BottomPagination from "./components/BottomPagination";
 import Toolbar from "./components/Toolbar";
 
 export default function Home() {
   const dispatch = useAppDispatch();
-  const { items, status } = useAppSelector((state) => state.products);
-  const [searchParams] = useSearchParams();
-  const [page, setPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
-
-  const query = searchParams.get("search")?.toLowerCase() || "";
+  const status = useAppSelector((state) => state.products.status);
 
   useEffect(() => {
     if (status === "idle") {
@@ -22,50 +17,30 @@ export default function Home() {
     }
   }, [status]);
 
-  useEffect(() => {
-    setPage(1);
-  }, [query]);
-
-  const filteredProducts = useMemo(() => {
-    return items.filter((product: any) =>
-      product.title.toLowerCase().includes(query)
-    );
-  }, [items, query]);
-
-  const paginated = useMemo(() => {
-    const start = (page - 1) * itemsPerPage;
-    return filteredProducts.slice(start, start + itemsPerPage);
-  }, [filteredProducts, page]);
-
-  const totalPages = useMemo<number>(
-    () => Math.ceil(filteredProducts.length / itemsPerPage),
-    [itemsPerPage, filteredProducts]
-  );
-
-  const handlePageChange = useCallback((newPage: number) => {
-    setPage(newPage);
-  }, []);
-
   if (status === "loading") {
     return (
-      <Box mt={4} textAlign="center">
-        <CircularProgress />
+      <Box mt={"200px"} textAlign="center">
+        <CircularProgress thickness={5} />
+      </Box>
+    );
+  }
+
+  if (status === "failed") {
+    return (
+      <Box mt={"200px"} textAlign="center">
+        <InfoOutlineRounded color="error" />
+        <Typography textAlign={"center"} fontWeight={600} mt={2}>
+          Erro ao carregar os produtos
+        </Typography>
       </Box>
     );
   }
 
   return (
-    <Box flex={1} display={"flex"} flexDirection={"column"} pb={"100px"}>
+    <Box flex={1} display="flex" flexDirection="column" pb="100px">
       <Toolbar />
-      <ProductList products={paginated} />
-      <Box flex={1} />
-      {totalPages > 1 && (
-        <BottomPagination
-          page={page}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-        />
-      )}
+      <OfferShowcase />
+      <ProductList />
     </Box>
   );
 }

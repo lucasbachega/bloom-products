@@ -1,4 +1,9 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSelector,
+  createSlice,
+} from "@reduxjs/toolkit";
+import { RootState } from "..";
 import { listProducts } from "../../services/api";
 
 export const fetchProducts = createAsyncThunk("products/fetch", async () => {
@@ -43,3 +48,19 @@ const productsSlice = createSlice({
 export const { toggleLayoutMode } = productsSlice.actions;
 
 export default productsSlice.reducer;
+
+type ProductFilter = "all" | "discounted" | "regular";
+
+export const selectProducts = (filter: ProductFilter = "all") =>
+  createSelector(
+    (state: RootState) => state.products.items,
+    (products) => {
+      if (filter === "discounted") {
+        return products.filter((p) => p.hasDiscount);
+      }
+      if (filter === "regular") {
+        return products.filter((p) => !p.hasDiscount);
+      }
+      return products;
+    }
+  );
