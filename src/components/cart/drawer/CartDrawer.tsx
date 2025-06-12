@@ -1,5 +1,6 @@
 import { Drawer } from "@mui/material";
-import { memo } from "react";
+import { memo, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import DrawerContent from "./DrawerContent";
 import DrawerFooter from "./DrawerFooter";
 import DrawerHeader from "./DrawerHeader";
@@ -10,6 +11,12 @@ interface Props {
 }
 
 const CartDrawer = ({ open, onClose = () => {} }: Props) => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    onClose();
+  }, [pathname]);
+
   return (
     <Drawer
       open={open}
@@ -30,7 +37,7 @@ const CartDrawer = ({ open, onClose = () => {} }: Props) => {
     >
       <DrawerHeader onClose={onClose} />
       <DrawerContent />
-     <DrawerFooter />
+      <DrawerFooter />
     </Drawer>
   );
 };

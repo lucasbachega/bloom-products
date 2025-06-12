@@ -1,7 +1,7 @@
 import { List } from "@mui/material";
 import { useCallback } from "react";
 import { ICartItem } from "../../types/cart";
-import CartProductItem from "./CartProductItem";
+import CartListItem from "./CartListItem";
 
 interface Props {
   items: Array<ICartItem>;
@@ -9,7 +9,7 @@ interface Props {
 
 const CartList = ({ items = [] }: Props) => {
   const renderItems = useCallback((item: ICartItem) => {
-    return <CartProductItem item={item} />;
+    return <CartListItem key={item.id} item={item} />;
   }, []);
 
   return (

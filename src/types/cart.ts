@@ -4,4 +4,7 @@ export interface ICartItem {
   price: number;
   quantity: number;
   image: string;
+  hasDiscount?: boolean;
+  discountPercent?: number;
+  discountPrice?: number;
 }
