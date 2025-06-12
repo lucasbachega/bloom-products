@@ -12,6 +12,7 @@ export const layoutModeTransform = createTransform<
     items: [],
     status: "idle",
     layoutMode: outboundState.layoutMode ?? "grid",
+    itemsPerPage: outboundState.itemsPerPage ?? 5,
   }),
   { whitelist: ["products"] }
 );

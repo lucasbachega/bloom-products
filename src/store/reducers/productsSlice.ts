@@ -16,12 +16,14 @@ export type ProductsState = {
   items: any[];
   status: "idle" | "loading" | "succeeded" | "failed";
   layoutMode: "grid" | "list";
+  itemsPerPage: number;
 };
 
 const initialState: ProductsState = {
   items: [],
   status: "idle",
   layoutMode: "grid",
+  itemsPerPage: 5,
 };
 
 const productsSlice = createSlice({
@@ -33,6 +35,9 @@ const productsSlice = createSlice({
     },
     setLayoutMode(state, action: PayloadAction<"list" | "grid">) {
       state.layoutMode = action.payload;
+    },
+    setItemsPerPage(state, action: PayloadAction<5 | 10 | 20>) {
+      state.itemsPerPage = action.payload;
     },
   },
   extraReducers(builder) {
@@ -49,7 +54,8 @@ const productsSlice = createSlice({
       });
   },
 });
-export const { toggleLayoutMode, setLayoutMode } = productsSlice.actions;
+export const { toggleLayoutMode, setLayoutMode, setItemsPerPage } =
+  productsSlice.actions;
 
 export default productsSlice.reducer;
 
@@ -68,5 +74,12 @@ export const selectProducts = createSelector(
       return products.filter((p) => !p.hasDiscount);
     }
     return products;
+  }
+);
+
+export const selectProductsTotal = createSelector(
+  [(state: RootState) => state.products.items],
+  (products) => {
+    return products.length ?? 0;
   }
 );

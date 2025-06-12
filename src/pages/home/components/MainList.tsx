@@ -11,13 +11,13 @@ const MainList = () => {
 
   const [searchParams] = useSearchParams();
   const [page, setPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = useAppSelector((state) => state.products.itemsPerPage);
 
   const query = searchParams.get("search")?.toLowerCase() || "";
 
   useEffect(() => {
     setPage(1);
-  }, [Boolean(query)]);
+  }, [Boolean(query), itemsPerPage]);
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) =>
@@ -28,11 +28,11 @@ const MainList = () => {
   const paginatedProducts = useMemo(() => {
     const start = (page - 1) * itemsPerPage;
     return filteredProducts.slice(start, start + itemsPerPage);
-  }, [filteredProducts, page]);
+  }, [filteredProducts, page, itemsPerPage]);
 
   const totalPages = useMemo(
     () => Math.ceil(filteredProducts.length / itemsPerPage),
-    [filteredProducts]
+    [filteredProducts, itemsPerPage]
   );
 
   const handlePageChange = useCallback((newPage: number) => {
