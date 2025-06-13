@@ -1,6 +1,7 @@
-import { InfoOutlineRounded } from "@mui/icons-material";
-import { Box, CircularProgress, Container, Typography } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { useEffect } from "react";
+import ErrorBox from "../../components/ui/ErrorBox";
+import LoadingBox from "../../components/ui/LoadingBox";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { fetchProducts } from "../../store/reducers/productsSlice";
 import MainList from "./components/MainList";
@@ -19,22 +20,11 @@ function Wrapper({ children }: any) {
 
   if (status !== "succeeded") {
     if (status === "loading") {
-      return (
-        <Box mt={"200px"} textAlign="center">
-          <CircularProgress thickness={5} />
-        </Box>
-      );
+      return <LoadingBox />;
     }
 
     if (status === "failed") {
-      return (
-        <Box mt={"200px"} textAlign="center">
-          <InfoOutlineRounded color="error" sx={{ fontSize: "5rem" }} />
-          <Typography textAlign={"center"} fontWeight={600} mt={2}>
-            Erro ao carregar os produtos
-          </Typography>
-        </Box>
-      );
+      return <ErrorBox error="Erro ao carregar os produtos" />;
     }
 
     return null;
