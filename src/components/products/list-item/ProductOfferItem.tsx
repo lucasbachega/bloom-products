@@ -1,75 +1,13 @@
-import {
-  DeleteOutlineOutlined,
-  SentimentSatisfiedAltOutlined,
-  ShoppingCartOutlined,
-} from "@mui/icons-material";
-import {
-  Box,
-  Button,
-  CardActionArea,
-  IconButton,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, CardActionArea, Stack, Typography } from "@mui/material";
 import { memo } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../../hooks/reduxHooks";
-import { useIsInCart } from "../../../hooks/useIsInCart";
-import { addToCart, removeFromCart } from "../../../store/reducers/cartSlice";
 import { IProduct } from "../../../types/products";
 import { formatAmount } from "../../../utils/formatters";
+import AddToCartButton from "../../AddToCartButton";
 import DiscountBadge from "../DiscountBadge";
 
 interface ItemProps {
   product: IProduct;
-}
-interface AddToCartButtonProps {
-  product: IProduct;
-}
-
-function AddToCartButton({ product }: AddToCartButtonProps) {
-  const dispatch = useAppDispatch();
-  const isInCart = useIsInCart(product.id);
-
-  const handleAddToCart = () => {
-    if (isInCart) return;
-    dispatch(
-      addToCart({
-        ...product,
-        quantity: 1,
-      })
-    );
-  };
-
-  const handleRemoveFromCart = () => {
-    dispatch(removeFromCart(product.id));
-  };
-
-  return (
-    <>
-      <Button
-        onClick={handleAddToCart}
-        startIcon={
-          isInCart ? (
-            <SentimentSatisfiedAltOutlined />
-          ) : (
-            <ShoppingCartOutlined />
-          )
-        }
-        disabled={isInCart}
-        size="small"
-        fullWidth
-        variant="contained"
-      >
-        {isInCart ? "No carrinho" : "Comprar"}
-      </Button>
-      {isInCart && (
-        <IconButton size="small" onClick={handleRemoveFromCart}>
-          <DeleteOutlineOutlined fontSize="small" />
-        </IconButton>
-      )}
-    </>
-  );
 }
 
 const ProductOfferItem = ({ product }: ItemProps) => {
@@ -119,7 +57,7 @@ const ProductOfferItem = ({ product }: ItemProps) => {
         </Stack>
       </CardActionArea>
       <Stack height={30} direction={"row"} gap={1} width={"100%"} px={2}>
-        <AddToCartButton product={product} />
+        <AddToCartButton product={product} stackProps={{ flex: 1 }} />
       </Stack>
     </Box>
   );

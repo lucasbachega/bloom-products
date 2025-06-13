@@ -10,7 +10,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { memo } from "react";
-import ToggleThemeButton from "../buttons/ToggleThemeButton";
+import ToggleThemeButton from "../ui/buttons/ToggleThemeButton";
 import CartButton from "./CartButton";
 import SearchBar from "./SearchBar";
 
@@ -27,12 +27,12 @@ const Appbar = () => {
     <AppBar
       position="sticky"
       variant="outlined"
-      enableColorOnDark
       color="secondary"
       sx={{
         "& .MuiTypography-root": { color: "#FFF" },
         "& .MuiIconButton-root": { color: "#FFF" },
         boxShadow: scrolled ? 4 : 0,
+        border: "none",
       }}
     >
       <Container>

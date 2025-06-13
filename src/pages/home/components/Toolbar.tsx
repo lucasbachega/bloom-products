@@ -23,7 +23,7 @@ function ToggleLayoutButton() {
   return (
     <ToggleButtonGroup
       exclusive
-      sx={{ height: 30 }}
+      sx={{ height: 30, display: { xs: "none", md: "flex" } }}
       color="secondary"
       value={layoutMode || "list"}
       onChange={(e, v) => Boolean(v) && dispatch(setLayoutMode(v))}
@@ -86,7 +86,7 @@ function ToolbarTitle() {
 
 const Toolbar = () => {
   return (
-    <Stack zIndex={10} height={45} bgcolor={"backgroundGray.main"}>
+    <Stack zIndex={10} height={50} bgcolor={"backgroundGray.main"}>
       <Container
         sx={{
           width: "100%",

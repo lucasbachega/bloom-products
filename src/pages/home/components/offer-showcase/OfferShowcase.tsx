@@ -27,7 +27,12 @@ const OfferShowcase = () => {
       }}
     >
       <Container>
-        <Typography fontWeight={600} mb={1} fontSize={"1.1rem"}>
+        <Typography
+          color="textSecondary"
+          fontWeight={500}
+          mb={1}
+          fontSize={"1.1rem"}
+        >
           Men's Clothing
         </Typography>
 

@@ -60,7 +60,7 @@ export const theme = createTheme({
           main: "#5062F0",
         },
         primary: {
-          main: "#0B1A8E",
+          main: "#4556da",
         },
         backgroundGray: {
           main: "#252525",

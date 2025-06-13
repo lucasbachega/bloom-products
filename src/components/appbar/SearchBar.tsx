@@ -29,12 +29,13 @@ const SearchBar = () => {
 
   return (
     <Paper
-      elevation={0}
+      elevation={1}
       sx={{
         borderRadius: 100,
         height: 40,
         maxWidth: 450,
         width: "100%",
+        boxShadow: 0,
         "& .MuiIconButton-root": { color: "action.active" },
       }}
     >
@@ -62,6 +63,10 @@ const SearchBar = () => {
           gap: 1,
           height: "100%",
           width: "100%",
+          borderRadius: 100,
+          ":focus-within": {
+            boxShadow: 10,
+          },
         }}
       />
     </Paper>
