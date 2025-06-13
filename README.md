@@ -1,46 +1,60 @@
-# Getting Started with Create React App
+# Bloom Store
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicação de e-commerce construída com React, Redux Toolkit e Material UI, com foco em performance, responsividade e experiência do usuário.
 
-## Available Scripts
+Link para testar online: https://bloom-products-eb3ptt4lh-lucas-bachegas-projects.vercel.app/
 
-In the project directory, you can run:
+## Tecnologias utilizadas
 
-### `npm start`
+- React.js com TypeScript
+- Redux Toolkit para gerenciamento global de estado
+- Redux Persist para manter o carrinho salvo no localStorage
+- React Router DOM para navegação entre páginas
+- MUI (Material UI) para componentes visuais e responsividade
+- Axios para consumo da Fake Store API
+- Fake Store API como backend simulado
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Principais funcionalidades
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Pesquisa de produtos com debounce e URL sincronizada
+- Carrinho persistente com adição, remoção e controle de quantidade
+- Aplicação de desconto automática para a categoria "men's clothing"
+- Layout responsivo e adaptável a qualquer tamanho de tela
+- Página de detalhes com visual promocional
+- Paginação dinâmica por quantidade de itens por página
+- Modo claro e escuro alternável
 
-### `npm test`
+## Como executar localmente
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone o repositório:
 
-### `npm run build`
+git clone https://github.com/lucasbachega/bloom-products.git
+cd bloom-store
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Instale as dependências:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+npm install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Inicie o projeto:
 
-### `npm run eject`
+npm start
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+A aplicação estará disponível em http://localhost:3000
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Estrutura do projeto
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+src/
+├── components/        - Componentes reutilizáveis
+├── pages/             - Páginas principais (Home, Detalhes)
+├── store/             - Redux slices, selectors e store configurado
+├── hooks/             - Hooks personalizados
+├── services/          - API e integração com Axios
+├── types/             - Tipagens e interfaces globais
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Deploy
 
-## Learn More
+Hospedado na Vercel com build automático.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Autor
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Lucas Bachega
