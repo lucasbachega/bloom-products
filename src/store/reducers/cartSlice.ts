@@ -72,13 +72,16 @@ export const selectQuantityByProductId = createSelector(
 );
 
 export const selectCartTotalPrice = createSelector([selectCartItems], (items) =>
-  items.reduce((total, item) => total + item.price * item.quantity, 0)
+  items.reduce(
+    (total, item) => total + (item.discountPrice || item.price) * item.quantity,
+    0
+  )
 );
 
 export const selectItemTotalByProductId = createSelector(
   [selectCartItems, (_state: RootState, productId: number) => productId],
   (items, productId) => {
     const item = items.find((i) => i.id === productId);
-    return item ? item.price * item.quantity : 0;
+    return item ? (item.discountPrice || item.price) * item.quantity : 0;
   }
 );

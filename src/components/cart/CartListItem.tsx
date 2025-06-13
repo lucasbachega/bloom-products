@@ -17,8 +17,8 @@ const CartListItem = ({ item }: Props) => {
   const dispatch = useAppDispatch();
 
   const totalAmount = useMemo(
-    () => item.quantity * item.price,
-    [item.quantity, item.price]
+    () => item.quantity * (item.discountPrice || item.price),
+    [item.quantity, item.price, item.discountPrice]
   );
 
   const handleRemoveItem = () => {
@@ -80,7 +80,7 @@ const CartListItem = ({ item }: Props) => {
                   DE: R$ {formatAmount(item.price)}
                 </Typography>
                 <Typography mt={-1} fontWeight={600} textAlign={"right"}>
-                  POR: R$ {formatAmount(item.price)}
+                  POR: R$ {formatAmount(item.discountPrice)}
                 </Typography>
               </>
             ) : (
