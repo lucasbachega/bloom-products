@@ -41,16 +41,6 @@ npm start
 
 A aplicação estará disponível em http://localhost:3000
 
-## Estrutura do projeto
-
-src/
-├── components/        - Componentes reutilizáveis
-├── pages/             - Páginas principais (Home, Detalhes)
-├── store/             - Redux slices, selectors e store configurado
-├── hooks/             - Hooks personalizados
-├── services/          - API e integração com Axios
-├── types/             - Tipagens e interfaces globais
-
 ## Deploy
 
 Hospedado na Vercel com build automático.
