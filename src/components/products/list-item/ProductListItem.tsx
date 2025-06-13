@@ -38,6 +38,7 @@ const ProductImage = styled("img", {
 }));
 
 const ProductTitle = styled(Typography)({
+  width: "100%",
   display: "-webkit-box",
   WebkitLineClamp: 1,
   WebkitBoxOrient: "vertical",
@@ -46,6 +47,7 @@ const ProductTitle = styled(Typography)({
 });
 
 const ProductDescription = styled(Typography)({
+  width: "100%",
   display: "-webkit-box",
   WebkitLineClamp: 4,
   WebkitBoxOrient: "vertical",
@@ -87,19 +89,19 @@ const ProductListItem = ({ product, isGridLike = false }: Props) => {
             />
           </ProductImageBox>
 
-          <Box flex={1} display="flex" flexDirection="column" height="100%">
-            <Box>
-              <ProductTitle variant="h5" fontSize="1.2em" fontWeight={600}>
-                {product.title}
-              </ProductTitle>
-              <Typography
-                variant="body1"
-                color="textSecondary"
-                fontWeight={500}
-              >
-                {product.category}
-              </Typography>
-            </Box>
+          <Box
+            flex={1}
+            display="flex"
+            flexDirection="column"
+            height="100%"
+            overflow={"hidden"}
+          >
+            <ProductTitle variant="h5" fontSize="1.2em" fontWeight={600}>
+              {product.title}
+            </ProductTitle>
+            <Typography variant="body1" color="textSecondary" fontWeight={500}>
+              {product.category}
+            </Typography>
 
             <Box mt={isGridLike ? 1.5 : 0}>
               <Typography variant="h4" fontWeight={600} mt={1} gutterBottom>
