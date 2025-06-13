@@ -1,13 +1,13 @@
 import { ArrowBack } from "@mui/icons-material";
 import {
-    Box,
-    Container,
-    Grid,
-    IconButton,
-    Paper,
-    Rating,
-    Stack,
-    Typography,
+  Box,
+  Container,
+  Grid,
+  IconButton,
+  Paper,
+  Rating,
+  Stack,
+  Typography,
 } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import ErrorBox from "../../components/ui/ErrorBox";
@@ -67,9 +67,17 @@ export default function ProductDetailPage() {
               >
                 Produto <strong>{data.id}</strong>
               </Typography>
-              <Stack direction={"row"} alignItems={"center"} gap={1}>
+              <Stack
+                direction={{ xs: "column", md: "row" }}
+                alignItems={"center"}
+                gap={1}
+              >
                 <Rating readOnly value={data.rating.rate} />
-                <Typography variant="body2" color="textSecondary">
+                <Typography
+                  textAlign={{ xs: "center", md: "left" }}
+                  variant="body2"
+                  color="textSecondary"
+                >
                   ({data.rating.count} comentários)
                 </Typography>
               </Stack>
