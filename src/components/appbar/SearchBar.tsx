@@ -1,9 +1,10 @@
 import { Close, Search } from "@mui/icons-material";
 import { IconButton, InputAdornment, InputBase, Paper } from "@mui/material";
 import { memo, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const SearchBar = () => {
+  const navigate = useNavigate();
   const [params, setParams] = useSearchParams();
   const initial = params.get("search") || "";
   const [value, setValue] = useState(initial);
@@ -27,8 +28,17 @@ const SearchBar = () => {
     setParams(params, { replace: true });
   };
 
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    if (value?.trim()) {
+      navigate(`/?search=${value}`);
+    }
+  };
+
   return (
     <Paper
+      component={"form"}
+      onSubmit={handleSubmit}
       elevation={1}
       sx={{
         borderRadius: 100,
@@ -51,7 +61,7 @@ const SearchBar = () => {
           <InputAdornment position="end">
             {Boolean(value.trim()) && (
               <IconButton color="primary" onClick={handleClear}>
-                <Close />
+                <Close sx={{ color: "text.primary" }} />
               </IconButton>
             )}
           </InputAdornment>
