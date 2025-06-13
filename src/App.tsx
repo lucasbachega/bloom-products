@@ -16,8 +16,8 @@ function App() {
         <ThemeProvider theme={theme} defaultMode="light">
           <CssBaseline />
           <BrowserRouter>
-            <Appbar />
             <AppContainer>
+              <Appbar />
               <AppRouter />
             </AppContainer>
           </BrowserRouter>

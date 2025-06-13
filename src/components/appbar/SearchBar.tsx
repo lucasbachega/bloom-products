@@ -67,6 +67,11 @@ const SearchBar = () => {
           </InputAdornment>
         }
         placeholder="Pesquise aqui..."
+        slotProps={{
+          input: {
+            type: "search",
+          },
+        }}
         sx={{
           px: 2,
           pr: 1,
