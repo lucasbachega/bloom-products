@@ -16,13 +16,14 @@ const OfferShowcase = () => {
 
   return (
     <Paper
-      elevation={3}
+      elevation={1}
       sx={{
         width: "100%",
         mt: -1,
         py: "30px",
         overflow: "hidden",
         borderRadius: 0,
+        boxShadow: 4,
       }}
     >
       <Container>

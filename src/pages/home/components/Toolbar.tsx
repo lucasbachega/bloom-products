@@ -10,7 +10,6 @@ import {
   ToggleButtonGroup,
   Typography,
 } from "@mui/material";
-import { grey } from "@mui/material/colors";
 import { useAppDispatch, useAppSelector } from "../../../hooks/reduxHooks";
 import {
   selectProductsTotal,
@@ -87,7 +86,7 @@ function ToolbarTitle() {
 
 const Toolbar = () => {
   return (
-    <Stack zIndex={10} height={45} bgcolor={grey[200]}>
+    <Stack zIndex={10} height={45} bgcolor={"backgroundGray.main"}>
       <Container
         sx={{
           width: "100%",

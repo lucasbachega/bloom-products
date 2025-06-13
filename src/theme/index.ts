@@ -45,6 +45,9 @@ export const theme = createTheme({
         primary: {
           main: "#0B1A8E",
         },
+        backgroundGray: {
+          main: "#F5F5F5",
+        },
         text: {
           primary: "#0D0D0D",
           secondary: "#69666F",
@@ -58,6 +61,9 @@ export const theme = createTheme({
         },
         primary: {
           main: "#0B1A8E",
+        },
+        backgroundGray: {
+          main: "#252525",
         },
         text: {
           primary: "#FFF",
